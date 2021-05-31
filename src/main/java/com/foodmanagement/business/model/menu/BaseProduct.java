@@ -58,6 +58,11 @@ public class BaseProduct extends MenuItem implements Serializable {
         return this.getPrice();
     }
 
+    @Override
+    protected boolean partWellFormed() {
+        return (rating >= 1.0 && rating <= 10.0) && proteins >= 0 && calories >= 0 && sodium >= 0 && fats >= 0;
+    }
+
     @Builder(toBuilder = true)
     public BaseProduct(final UUID id, final String name, final double price, final String title,
                        final double rating, final int calories, final int proteins,

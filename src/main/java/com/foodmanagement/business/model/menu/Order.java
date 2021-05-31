@@ -50,8 +50,12 @@ public class Order implements Serializable {
                 "Order (%s) for client: %s at %s",
                 id,
                 clientId,
-                orderDate.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG))
+                orderDate.toString()
         );
+    }
+
+    public boolean wellFormed() {
+        return id != null && clientId != null && orderDate != null;
     }
 
 }

@@ -10,8 +10,8 @@ import java.util.UUID;
 
 public class UserService implements IUserServiceProcessing {
 
-    private static final Map<String, User> usernameToUserMap = new HashMap<>();
-    private static final Map<UUID, String>  userIdToUsernameMap = new HashMap<>();
+    public static final Map<String, User> usernameToUserMap = new HashMap<>();
+    public static final Map<UUID, String> userIdToUsernameMap = new HashMap<>();
 
     public UserService() {
         initializeSystemUsers();
@@ -32,7 +32,9 @@ public class UserService implements IUserServiceProcessing {
     }
 
     @Override
-    public void registerUser(String username, String password, Role role) {
+    public User registerUser(final String username,
+                             final String password,
+                             final Role role) {
         final UUID id = UUID.randomUUID();
         final User user = User.builder()
                 .id(id)
@@ -43,5 +45,16 @@ public class UserService implements IUserServiceProcessing {
 
         usernameToUserMap.put(username, user);
         userIdToUsernameMap.put(id, username);
+
+        return user;
+    }
+
+    @Override
+    public User loginUser(final String username, final String password) {
+        if (usernameToUserMap.get(username) != null &&
+                (usernameToUserMap.get(username) == null || usernameToUserMap.get(username).getPassword().equals(password))) {
+            return usernameToUserMap.get(username);
+        }
+        return null;
     }
 }
