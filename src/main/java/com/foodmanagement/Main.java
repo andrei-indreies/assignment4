@@ -19,13 +19,13 @@ public class Main {
     }
 
     public static void initRegisterLoginToFrameUi(JFrame frame) {
-        JButton loginButton = InitializerUi.addButtonToFrame(frame, LOGIN_LABEL, 220, 220);
+        JButton loginButton = InitializerUi.addButtonToFrame(frame, LOGIN_LABEL, 400, 220);
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 LoginUi login = new LoginUi(frame);
             }
         });
-        JButton registerButton = InitializerUi.addButtonToFrame(frame, REGISTER_LABEL, 100, 220);
+        JButton registerButton = InitializerUi.addButtonToFrame(frame, REGISTER_LABEL, 600, 220);
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 RegisterUi register = new RegisterUi(frame);

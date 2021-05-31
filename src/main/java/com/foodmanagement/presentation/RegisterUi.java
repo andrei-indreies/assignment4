@@ -26,11 +26,11 @@ public class RegisterUi extends BaseUi {
 
         userService = new UserService();
 
-        usernameField = InitializerUi.addJTextFieldToFrame(frame, 175, 370);
-        passwordField = InitializerUi.addJPasswordFieldToFrame(frame, 175, 400);
-        userRole = InitializerUi.addJTextFieldToFrame(frame, 175, 430);
-        register = InitializerUi.addButtonToFrame(frame, REGISTER_LABEL, 200, 470);
-        msgPopup = InitializerUi.addJTextFieldToFrame(frame, 175, 520);
+        usernameField = InitializerUi.addJTextFieldToFrame(frame, 350, 370);
+        passwordField = InitializerUi.addJPasswordFieldToFrame(frame, 350, 400);
+        userRole = InitializerUi.addJTextFieldToFrame(frame, 350, 430);
+        register = InitializerUi.addButtonToFrame(frame, REGISTER_LABEL, 450, 470);
+        msgPopup = InitializerUi.addJTextFieldToFrame(frame, 350, 520);
         msgPopup.setVisible(false);
         addRegisterEvent(register, usernameField, passwordField, userRole);
     }

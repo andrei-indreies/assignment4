@@ -23,9 +23,9 @@ public class LoginUi extends BaseUi{
 
         userService = new UserService();
 
-        login = InitializerUi.addButtonToFrame(frame, LOGIN_LABEL, 235, 450);
-        usernameField = InitializerUi.addJTextFieldToFrame(frame, 175, 370);
-        passwordField = InitializerUi.addJPasswordFieldToFrame(frame, 175, 400);
+        login = InitializerUi.addButtonToFrame(frame, LOGIN_LABEL, 450, 450);
+        usernameField = InitializerUi.addJTextFieldToFrame(frame, 350, 370);
+        passwordField = InitializerUi.addJPasswordFieldToFrame(frame, 350, 400);
         this.addLoginEvent(login, usernameField, passwordField);
     }
 
