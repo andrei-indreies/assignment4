@@ -2,7 +2,6 @@ package com.foodmanagement.presentation;
 
 import com.foodmanagement.business.IUserServiceProcessing;
 import com.foodmanagement.business.impl.UserService;
-import com.foodmanagement.business.model.user.Role;
 import com.foodmanagement.business.model.user.User;
 
 import javax.swing.*;
@@ -22,11 +21,11 @@ public class LoginUi extends BaseUi{
         this.exFrame = exFrame;
         exFrame.setVisible(false);
 
-        this.userService = new UserService();
+        userService = new UserService();
 
-        login = InitializerUi.addButtonToFrame(frame, LOGIN_LABEL, 235, 450);
-        usernameField = InitializerUi.addJTextFieldToFrame(frame, 175, 400);
-        passwordField = InitializerUi.addJPasswordFieldToFrame(frame, 175, 370);
+        login = InitializerUi.addButtonToFrame(frame, LOGIN_LABEL, 450, 450);
+        usernameField = InitializerUi.addJTextFieldToFrame(frame, 350, 370);
+        passwordField = InitializerUi.addJPasswordFieldToFrame(frame, 350, 400);
         this.addLoginEvent(login, usernameField, passwordField);
     }
 

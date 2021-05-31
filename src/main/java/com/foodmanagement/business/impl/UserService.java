@@ -51,8 +51,7 @@ public class UserService implements IUserServiceProcessing {
 
     @Override
     public User loginUser(final String username, final String password) {
-        if (usernameToUserMap.get(username) != null &&
-                (usernameToUserMap.get(username) == null || usernameToUserMap.get(username).getPassword().equals(password))) {
+        if (usernameToUserMap.get(username) != null && usernameToUserMap.get(username).getPassword().equals(password)) {
             return usernameToUserMap.get(username);
         }
         return null;

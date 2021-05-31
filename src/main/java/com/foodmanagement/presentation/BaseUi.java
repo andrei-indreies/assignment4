@@ -14,7 +14,7 @@ public class BaseUi {
 
     public BaseUi() {
         frame = InitializerUi.initFrameUi();
-        backButton = InitializerUi.addButtonToFrame(frame, BACK_LABEL, 450, 30);
+        backButton = InitializerUi.addButtonToFrame(frame, BACK_LABEL, 900, 30);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
