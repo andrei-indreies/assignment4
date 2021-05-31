@@ -1,0 +1,2 @@
+BaseProduct(title=aaaa, rating=10.0, calories=100, proteins=50, fats=60, sodium=0)=2
+BaseProduct(title=bbb, rating=10.0, calories=100, proteins=50, fats=60, sodium=0)=1

@@ -30,6 +30,11 @@ public class CompositeProduct extends MenuItem
                 .sum();
     }
 
+    @Override
+    public boolean partWellFormed() {
+        return !menuItems.isEmpty() && menuItems.stream().allMatch(MenuItem::wellFormed);
+    }
+
     @Builder(toBuilder = true)
     public CompositeProduct(final UUID id, final String name,
                             final double price, final List<MenuItem> menuItems) {

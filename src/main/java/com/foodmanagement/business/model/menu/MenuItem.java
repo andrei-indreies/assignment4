@@ -13,7 +13,7 @@ import java.util.UUID;
 /**
  * Abstract class used for defining item from menu.
  */
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
@@ -36,5 +36,9 @@ public abstract class MenuItem implements Serializable {
      * @return The computed price.
      */
     public abstract double computePrice();
+    protected abstract boolean partWellFormed();
 
+    public boolean wellFormed() {
+        return id != null && !name.isBlank() && price >= 0.0 && this.partWellFormed();
+    }
 }
