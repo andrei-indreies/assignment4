@@ -2,6 +2,7 @@ package com.foodmanagement;
 
 import com.foodmanagement.presentation.InitializerUi;
 import com.foodmanagement.presentation.LoginUi;
+import com.foodmanagement.presentation.RegisterUi;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,9 +26,9 @@ public class Main {
             }
         });
         JButton registerButton = InitializerUi.addButtonToFrame(frame, REGISTER_LABEL, 100, 220);
-        loginButton.addActionListener(new ActionListener() {
+        registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                //LoginUi register = new RegisterUi(frame);
+                RegisterUi register = new RegisterUi(frame);
             }
         });
     }
