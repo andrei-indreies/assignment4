@@ -8,19 +8,21 @@ import com.foodmanagement.business.model.criteria.SearchCriteria;
 import com.foodmanagement.business.model.menu.MenuItem;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.foodmanagement.presentation.InitializerUi.*;
 import static com.foodmanagement.presentation.LabelsLibrary.BUTTON_HEIGHT;
 import static com.foodmanagement.presentation.LabelsLibrary.TEXT_AREA_HEIGHT;
+import static com.foodmanagement.presentation.LabelsLibrary.BUTTON_HEIGHT;
 
-public class ClientUI extends BaseUi {
+public class ClientUI extends ProductTableUI {
 
     protected JButton viewMenuButton;
     protected JButton search;
-    protected JTextArea menuTextArea;
     private IUserServiceProcessing userService;
     private IDeliveryServiceProcessing deliveryService;
     private JTextField keyword;
@@ -40,17 +42,15 @@ public class ClientUI extends BaseUi {
     private JLabel priceLabel;
 
     public ClientUI(JFrame exFrame) {
-        userService = new UserService();
-        deliveryService = new DeliveryService();
-
         this.exFrame = exFrame;
         exFrame.setVisible(false);
+
+        userService = new UserService();
+        deliveryService = new DeliveryService();
 
         viewMenuButton = addButtonToFrame(frame, "View Menu", 50, 50);
         viewMenuButton.setBounds(50, 50, 150, BUTTON_HEIGHT);
 
-        menuTextArea = addJTextAreaToFrame(frame, 50, 90);
-        menuTextArea.setBounds(50, 90, 700, TEXT_AREA_HEIGHT);
         addViewMenuEvent(viewMenuButton);
 
         keywordLabel = addJLabelToFrame(frame, 50, 300, "keyword");
@@ -77,21 +77,28 @@ public class ClientUI extends BaseUi {
         search = addButtonToFrame(frame, "Search", 50, 510);
         search.setBounds(50, 510, 150, BUTTON_HEIGHT);
         addSearchEvent(search, keyword, rating, calories, proteins, fats, sodium, price);
+
+
     }
 
     public void addViewMenuEvent(JButton button) {
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                final String content = deliveryService.getProducts().stream()
+                final List<String> content = deliveryService.getProducts().stream()
                         .map(MenuItem::toString)
-                        .collect(Collectors.joining("\n"));
+                        .collect(Collectors.toList());
 
-                menuTextArea.append(content);
+
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                for (int i = 0; i < content.size(); i++) {
+                    String[] parts = content.get(i).split(",");
+                    model.addRow(new Object[]{parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]});
+                }
             }
         });
     }
 
-    public void addSearchEvent(JButton button, JTextField keyword,JTextField rating, JTextField calories,
+    public void addSearchEvent(JButton button, JTextField keyword, JTextField rating, JTextField calories,
                                JTextField proteins, JTextField fats, JTextField sodium,
                                JTextField price) {
         button.addActionListener(new ActionListener() {
@@ -110,9 +117,9 @@ public class ClientUI extends BaseUi {
                         .map(MenuItem::toString)
                         .collect(Collectors.joining("\n"));
 
-                menuTextArea.selectAll();
-                menuTextArea.replaceSelection("");
-                menuTextArea.append(content);
+//                menuTextArea.selectAll();
+//                menuTextArea.replaceSelection("");
+//                menuTextArea.append(content);
             }
         });
     }

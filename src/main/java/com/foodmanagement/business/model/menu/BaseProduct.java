@@ -75,4 +75,10 @@ public class BaseProduct extends MenuItem implements Serializable {
         this.fats = fats;
         this.sodium = sodium;
     }
+
+    @Override
+    public String toString() {
+        return String.join(",", title, String.valueOf(rating), String.valueOf(calories), String.valueOf(proteins),
+                String.valueOf(fats), String.valueOf(sodium), String.valueOf(price));
+    }
 }

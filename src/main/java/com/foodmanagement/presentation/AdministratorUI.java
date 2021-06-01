@@ -8,21 +8,17 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import static com.foodmanagement.presentation.LabelsLibrary.*;
 
-public class AdministratorUI extends BaseUi {
+public class AdministratorUI extends ProductViewUi {
     protected IDeliveryServiceProcessing deliveryService;
     protected JTextField importFileName;
-
     public AdministratorUI(JFrame exFrame) {
-        this.exFrame = exFrame;
         exFrame.setVisible(false);
         deliveryService = new DeliveryService();
-        backButton.setText(LOGOUT_LABEL);
         addAppendButton();
         addDeleteButton();
         addImportButton();
