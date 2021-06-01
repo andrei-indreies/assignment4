@@ -77,6 +77,13 @@ public class DeliveryService extends Observable implements IDeliveryServiceProce
     }
 
     @Override
+    public MenuItem getProductByName(String name) {
+        MenuItem menuItem =  menuMap.get(name);
+
+        return menuItem;
+    }
+
+    @Override
     public void deleteProduct(final UUID id) {
         assert id != null;
 

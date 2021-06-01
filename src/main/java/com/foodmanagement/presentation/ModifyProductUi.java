@@ -13,7 +13,7 @@ public class ModifyProductUi extends ProductViewUi {
         fillTextBoxesWithProductData(product);
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                product.toBuilder()
+                BaseProduct updatedProduct = product.toBuilder()
                         .title(title.getText())
                         .rating(Double.parseDouble(rating.getText()))
                         .calories(Integer.parseInt(calories.getText()))
@@ -23,7 +23,7 @@ public class ModifyProductUi extends ProductViewUi {
                         .price(Double.parseDouble(price.getText()))
                         .build();
 
-                deliveryService.updateProduct(product);
+                deliveryService.updateProduct(updatedProduct);
 
                 msg.setText(PRODUCT_MODIFIED_SUCCESS);
             }

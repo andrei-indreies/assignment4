@@ -32,6 +32,14 @@ public interface IDeliveryServiceProcessing {
     MenuItem createProduct(MenuItem menuItem);
 
     /**
+     * Retrieve a product by a name given
+     *
+     * @param name
+     * @return MenuItem
+     */
+    MenuItem getProductByName(String name);
+
+    /**
      * Deletes an existing product.
      *
      * @param id The id of the product to be deleted.

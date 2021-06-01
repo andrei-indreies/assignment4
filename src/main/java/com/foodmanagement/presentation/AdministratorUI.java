@@ -3,38 +3,35 @@ package com.foodmanagement.presentation;
 import com.foodmanagement.business.IDeliveryServiceProcessing;
 import com.foodmanagement.business.impl.DeliveryService;
 import com.foodmanagement.business.model.menu.BaseProduct;
+import com.foodmanagement.business.model.menu.MenuItem;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static com.foodmanagement.presentation.InitializerUi.addButtonToFrame;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import static com.foodmanagement.presentation.LabelsLibrary.*;
 
-public class AdministratorUI extends ProductViewUi {
-    protected IDeliveryServiceProcessing deliveryService;
+public class AdministratorUI extends ProductTableUI {
     protected JTextField importFileName;
     public AdministratorUI(JFrame exFrame) {
         exFrame.setVisible(false);
-        deliveryService = new DeliveryService();
         addAppendButton();
         addDeleteButton();
         addImportButton();
-        BaseProduct baseProduct = BaseProduct.builder().title("merge").build();
-        addModifyButton(baseProduct);
+        addModifyButton();
+        addViewButton();
+        table.setBounds((FRAME_WIDTH-700)/2, 450, 700, 450);
+        table.setCellSelectionEnabled(false);
+    }
 
-
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Title");
-        model.addColumn("rating");
-        model.addColumn("calories");
-        model.addColumn("proteins");
-        model.addColumn("fats");
-        model.addColumn("sodium");
-        model.addColumn("price");
-        JTable table = new JTable(model);
+    private void addViewButton() {
+        JButton viewMenuButton = addButtonToFrame(frame, "View Menu", 400, 50);
+        viewMenuButton.setBounds((FRAME_WIDTH/2) - (150/2), 150, 150, BUTTON_HEIGHT);
+        addViewMenuEvent(viewMenuButton);
     }
 
     private void addAppendButton() {
@@ -50,11 +47,14 @@ public class AdministratorUI extends ProductViewUi {
         JButton deleteButton = InitializerUi.addButtonToFrame(frame, DELETE_LABEL, (FRAME_WIDTH/2) - (BUTTON_WIDTH/2), 200);
     }
 
-    private void addModifyButton(BaseProduct product) {
+    private void addModifyButton() {
         JButton modifyButton = InitializerUi.addButtonToFrame(frame, MODIFY_LABEL, (FRAME_WIDTH * 3/4) - (BUTTON_WIDTH/2), 200);
         modifyButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                ModifyProductUi modifyButton = new ModifyProductUi(product);
+                int row = table.getSelectedRow();
+                String rowData = table.getValueAt(row,0).toString();
+                MenuItem menuItem = deliveryService.getProductByName(rowData);
+                ModifyProductUi modifyProductUi = new ModifyProductUi((BaseProduct) menuItem);
             }
         });
     }
@@ -78,7 +78,6 @@ public class AdministratorUI extends ProductViewUi {
         importFileName.setBounds(160, 30, 150, 30);
         frame.add(importFileName);
         frame.add(csvLabel);
-
     }
 
     private String getCsvFileName() {
