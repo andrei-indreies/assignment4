@@ -5,10 +5,11 @@ import javax.swing.*;
 import static com.foodmanagement.presentation.LabelsLibrary.*;
 
 public class InitializerUi {
-    public static JFrame initFrameUi() {
+    public static JFrame initFrameUi(int width, int height) {
         JFrame f = new JFrame();
-        f.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        f.setSize(width, height);
         f.setLayout(null);
+        f.setResizable(false);
         f.setVisible(true);
 
         return f;

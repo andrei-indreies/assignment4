@@ -8,12 +8,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static com.foodmanagement.presentation.LabelsLibrary.LOGIN_LABEL;
-import static com.foodmanagement.presentation.LabelsLibrary.REGISTER_LABEL;
+import static com.foodmanagement.presentation.LabelsLibrary.*;
 
 public class Main {
     public static void main(String[] args) {
-        JFrame frame = InitializerUi.initFrameUi();
+        JFrame frame = InitializerUi.initFrameUi(FRAME_WIDTH, FRAME_HEIGHT);
         initRegisterLoginToFrameUi(frame);
 
     }
@@ -25,7 +24,7 @@ public class Main {
                 LoginUi login = new LoginUi(frame);
             }
         });
-        JButton registerButton = InitializerUi.addButtonToFrame(frame, REGISTER_LABEL, 600, 220);
+        JButton registerButton = InitializerUi.addButtonToFrame(frame, REGISTER_LABEL, 600, 350);
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 RegisterUi register = new RegisterUi(frame);
