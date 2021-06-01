@@ -6,7 +6,6 @@ import com.foodmanagement.business.model.user.Role;
 import com.foodmanagement.business.model.user.User;
 
 import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

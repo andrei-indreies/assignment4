@@ -58,7 +58,7 @@ public interface IDeliveryServiceProcessing {
      *
      * @return The list of products from the menu.
      */
-    Map<String, MenuItem> getProducts();
+    List<MenuItem> getProducts();
 
     /**
      * Retrieves a list of products based on some search criteria.

@@ -31,11 +31,28 @@ public class InitializerUi {
         return textField;
     }
 
+    public static JLabel addJLabelToFrame(JFrame frame, int x, int y, String text) {
+        JLabel label = new JLabel();
+        label.setText(text);
+        label.setBounds(x, y, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
+        frame.add(label);
+
+        return label;
+    }
+
     public static JPasswordField addJPasswordFieldToFrame(JFrame frame, int x, int y) {
         JPasswordField pass = new JPasswordField();
         pass.setBounds(x, y, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
         frame.add(pass);
 
         return pass;
+    }
+
+    public static JTextArea addJTextAreaToFrame(JFrame frame, int x, int y) {
+        JTextArea textArea = new JTextArea();
+        textArea.setBounds(x, y, TEXT_AREA_WIDTH, TEXT_AREA_HEIGHT);
+        frame.add(textArea);
+
+        return textArea;
     }
 }

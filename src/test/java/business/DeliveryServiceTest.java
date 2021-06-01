@@ -14,6 +14,7 @@ import com.foodmanagement.presentation.EmployeeUI;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
@@ -291,10 +292,10 @@ public class DeliveryServiceTest {
         deliveryService.createProduct(baseProduct1);
 
         // When
-        Map<String, MenuItem> menuItemMap = deliveryService.getProducts();
+        List<MenuItem> menuItems = deliveryService.getProducts();
 
         // Then
-        assertEquals(2, menuItemMap.size());
+        assertEquals(2, menuItems.size());
     }
 
     @Test
@@ -407,7 +408,7 @@ public class DeliveryServiceTest {
     public void Should_CreateOrder() {
         // Given
         DeliveryService deliveryService = new DeliveryService();
-        new EmployeeUI(deliveryService.getSubject());
+        new EmployeeUI(deliveryService.getSubject(), new JFrame());
 
         BaseProduct baseProduct = BaseProduct.builder()
                 .title("aaaa")

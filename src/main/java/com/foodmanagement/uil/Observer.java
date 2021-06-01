@@ -1,8 +1,6 @@
 package com.foodmanagement.uil;
 
-public abstract class Observer {
+public interface Observer {
 
-    protected Subject subject;
-
-    public abstract void update();
+    void update();
 }

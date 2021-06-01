@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -13,7 +14,9 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 @Builder
-public class User {
+public class User implements Serializable {
+
+    static final long serialVersionUID = -3677308468521206215L;
 
     UUID id;
 

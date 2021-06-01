@@ -15,6 +15,7 @@ import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -34,15 +35,14 @@ public class DeliveryService extends Observable implements IDeliveryServiceProce
     public static Map<UUID, String> idToNameMap = new HashMap<>();
 
     private Subject subject;
-    private Serializator serializator;
 
     public DeliveryService() {
         subject = new Subject();
-        serializator = new Serializator();
 
-        orderListMap = serializator.getOrders();
-        menuMap = serializator.getMenu();
-        idToNameMap = serializator.getIdToNameItemMap();
+        orderListMap.putAll(Serializator.getOrders());
+        menuMap.putAll(Serializator.getMenu());
+        idToNameMap.putAll(Serializator.getIdToNameItemMap());
+        importProducts("products.csv");
     }
 
     public boolean wellFormed() {
@@ -172,8 +172,8 @@ public class DeliveryService extends Observable implements IDeliveryServiceProce
     }
 
     @Override
-    public Map<String, MenuItem> getProducts() {
-        return menuMap;
+    public List<MenuItem> getProducts() {
+        return new ArrayList<>(menuMap.values());
     }
 
     @Override
