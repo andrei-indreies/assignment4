@@ -6,7 +6,6 @@ import com.foodmanagement.business.impl.DeliveryService;
 import com.foodmanagement.business.impl.UserService;
 import com.foodmanagement.business.model.criteria.SearchCriteria;
 import com.foodmanagement.business.model.menu.MenuItem;
-import com.foodmanagement.business.model.user.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +13,8 @@ import java.awt.event.ActionListener;
 import java.util.stream.Collectors;
 
 import static com.foodmanagement.presentation.InitializerUi.*;
-import static com.foodmanagement.presentation.LabelsLibrary.*;
+import static com.foodmanagement.presentation.LabelsLibrary.BUTTON_HEIGHT;
+import static com.foodmanagement.presentation.LabelsLibrary.TEXT_AREA_HEIGHT;
 
 public class ClientUI extends BaseUi {
 

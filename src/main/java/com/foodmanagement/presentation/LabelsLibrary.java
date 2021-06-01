@@ -16,7 +16,7 @@ public class LabelsLibrary {
     public static final int FRAME_WIDTH = 1000;
     public static final int MINI_FRAME_WIDTH = 320;
     public static final int FRAME_HEIGHT = 1000;
-    public static final int MINI_FRAME_HEIGHT = 400;
+    public static final int MINI_FRAME_HEIGHT = 450;
     public static final int BUTTON_WIDTH = 100;
     public static final int BUTTON_HEIGHT = 30;
     public static final int TEXT_FIELD_WIDTH = 300;

@@ -1,14 +1,9 @@
 package com.foodmanagement.presentation;
 
-import com.foodmanagement.business.impl.DeliveryService;
-import com.foodmanagement.data.Serializator;
 import com.foodmanagement.uil.Observer;
 import com.foodmanagement.uil.Subject;
 
 import javax.swing.*;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import static com.foodmanagement.presentation.InitializerUi.addJTextAreaToFrame;
 

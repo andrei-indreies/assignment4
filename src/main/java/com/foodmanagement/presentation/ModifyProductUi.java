@@ -4,7 +4,6 @@ import com.foodmanagement.business.model.menu.BaseProduct;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.UUID;
 
 import static com.foodmanagement.presentation.LabelsLibrary.*;
 
@@ -21,11 +20,12 @@ public class ModifyProductUi extends ProductViewUi {
                         .proteins(Integer.parseInt(proteins.getText()))
                         .fats(Integer.parseInt(fats.getText()))
                         .sodium(Integer.parseInt(sodium.getText()))
+                        .price(Double.parseDouble(price.getText()))
                         .build();
 
                 deliveryService.updateProduct(product);
 
-                msg.setText(PRODUCT_ADDED_SUCCESS);
+                msg.setText(PRODUCT_MODIFIED_SUCCESS);
             }
         });
     }
@@ -37,5 +37,6 @@ public class ModifyProductUi extends ProductViewUi {
         proteins.setText(String.valueOf(product.getProteins()));
         fats.setText(String.valueOf(product.getFats()));
         sodium.setText(String.valueOf(product.getSodium()));
+        price.setText(String.valueOf(product.getPrice()));
     }
 }

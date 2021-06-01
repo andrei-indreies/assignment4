@@ -14,6 +14,7 @@ public class ProductViewUi extends MiniUi {
     protected JTextField proteins;
     protected JTextField fats;
     protected JTextField sodium;
+    protected JTextField price;
     protected JButton button;
     protected IDeliveryServiceProcessing deliveryService;
 
@@ -28,7 +29,8 @@ public class ProductViewUi extends MiniUi {
         proteins = InitializerUi.addJTextFieldToFrame(frame, 10, 175);
         fats = InitializerUi.addJTextFieldToFrame(frame, 10, 225);
         sodium = InitializerUi.addJTextFieldToFrame(frame, 10, 275);
-        button = InitializerUi.addButtonToFrame(frame,  "Default", (MINI_FRAME_WIDTH-100)/2, 320);
+        price = InitializerUi.addJTextFieldToFrame(frame, 10, 325);
+        button = InitializerUi.addButtonToFrame(frame,  "Default", (MINI_FRAME_WIDTH-100)/2, 370);
     }
 
     public void addFormLabels() {
@@ -38,6 +40,7 @@ public class ProductViewUi extends MiniUi {
         JLabel proteins = new JLabel("Proteins");
         JLabel fats = new JLabel("Fats");
         JLabel sodium = new JLabel("Sodium");
+        JLabel price = new JLabel("Price");
 
         title.setBounds(10, 10 , 100, 15);
         rating.setBounds(10, 60 , 100, 15);
@@ -45,6 +48,7 @@ public class ProductViewUi extends MiniUi {
         proteins.setBounds(10, 160 , 100, 15);
         fats.setBounds(10, 210 , 100, 15);
         sodium.setBounds(10, 260 , 100, 15);
+        price.setBounds(10, 310 , 100, 15);
 
         frame.add(title);
         frame.add(rating);
@@ -52,5 +56,6 @@ public class ProductViewUi extends MiniUi {
         frame.add(proteins);
         frame.add(fats);
         frame.add(sodium);
+        frame.add(price);
     }
 }

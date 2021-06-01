@@ -25,6 +25,7 @@ public class AddProductUi extends ProductViewUi {
                         .proteins(Integer.parseInt(proteins.getText()))
                         .fats(Integer.parseInt(fats.getText()))
                         .sodium(Integer.parseInt(sodium.getText()))
+                        .price(Double.parseDouble(price.getText()))
                         .build();
 
                 deliveryService.createProduct(product);
