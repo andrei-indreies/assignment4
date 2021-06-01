@@ -3,28 +3,34 @@ package com.foodmanagement.presentation;
 import com.foodmanagement.business.IDeliveryServiceProcessing;
 import com.foodmanagement.business.IUserServiceProcessing;
 import com.foodmanagement.business.impl.DeliveryService;
+import com.foodmanagement.business.impl.EmployeeService;
 import com.foodmanagement.business.impl.UserService;
 import com.foodmanagement.business.model.criteria.SearchCriteria;
 import com.foodmanagement.business.model.menu.MenuItem;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.foodmanagement.presentation.InitializerUi.*;
 import static com.foodmanagement.presentation.LabelsLibrary.BUTTON_HEIGHT;
 import static com.foodmanagement.presentation.LabelsLibrary.TEXT_AREA_HEIGHT;
-import static com.foodmanagement.presentation.LabelsLibrary.BUTTON_HEIGHT;
 
 public class ClientUI extends ProductTableUI {
 
     protected JButton viewMenuButton;
     protected JButton search;
+    protected JButton order;
     private IUserServiceProcessing userService;
-    private IDeliveryServiceProcessing deliveryService;
+    private DeliveryService deliveryService;
+    private EmployeeService employeeService;
     private JTextField keyword;
     private JTextField rating;
     private JTextField calories;
@@ -41,12 +47,15 @@ public class ClientUI extends ProductTableUI {
     private JLabel sodiumLabel;
     private JLabel priceLabel;
 
+    private JTextArea textArea;
+
     public ClientUI(JFrame exFrame) {
         this.exFrame = exFrame;
         exFrame.setVisible(false);
 
         userService = new UserService();
         deliveryService = new DeliveryService();
+        employeeService = new EmployeeService(deliveryService.getSubject());
 
         viewMenuButton = addButtonToFrame(frame, "View Menu", 50, 50);
         viewMenuButton.setBounds(50, 50, 150, BUTTON_HEIGHT);
@@ -78,7 +87,32 @@ public class ClientUI extends ProductTableUI {
         search.setBounds(50, 510, 150, BUTTON_HEIGHT);
         addSearchEvent(search, keyword, rating, calories, proteins, fats, sodium, price);
 
+        textArea = addJTextAreaToFrame(frame, 50, 540);
+        textArea.setBounds(50, 540, 510, TEXT_AREA_HEIGHT);
 
+        ListSelectionModel cellSelectionModel = table.getSelectionModel();
+        cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        addCellSelectionModelListener(cellSelectionModel);
+
+        order = addButtonToFrame(frame, "Order", 50, 50);
+        order.setBounds(50, 760, 150, BUTTON_HEIGHT);
+        addOrderEvent(order);
+    }
+
+    public void addCellSelectionModelListener(ListSelectionModel cellSelectionModel) {
+        cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+
+                int selectedRow = table.getSelectedRow();
+                String row = table.getValueAt(selectedRow, 0).toString();
+
+                if (!textArea.getText().contains(row)) {
+                    textArea.append(row);
+                    textArea.append("\n");
+                }
+            }
+        });
     }
 
     public void addViewMenuEvent(JButton button) {
@@ -113,13 +147,31 @@ public class ClientUI extends ProductTableUI {
                         .price(!price.getText().isBlank() ? Double.parseDouble(price.getText()) : 0)
                         .build();
 
-                final String content = deliveryService.getFilteredProducts(searchCriteria).stream()
+                final List<String> content = deliveryService.getFilteredProducts(searchCriteria).stream()
                         .map(MenuItem::toString)
-                        .collect(Collectors.joining("\n"));
+                        .collect(Collectors.toList());
 
-//                menuTextArea.selectAll();
-//                menuTextArea.replaceSelection("");
-//                menuTextArea.append(content);
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                for (String s : content) {
+                    String[] parts = s.split(",");
+                    model.addRow(new Object[]{parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]});
+                }
+            }
+        });
+    }
+
+    public void addOrderEvent(JButton button) {
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String text = textArea.getText();
+                String[] items = text.split("\n");
+                List<MenuItem> menuItems = new ArrayList<>();
+
+                for (String item : items) {
+                    menuItems.add(DeliveryService.menuMap.get(item));
+                }
+
+                deliveryService.createOrder(UUID.randomUUID(), menuItems);
             }
         });
     }

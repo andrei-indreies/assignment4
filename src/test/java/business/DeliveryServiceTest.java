@@ -408,7 +408,7 @@ public class DeliveryServiceTest {
     public void Should_CreateOrder() {
         // Given
         DeliveryService deliveryService = new DeliveryService();
-        new EmployeeUI(deliveryService.getSubject(), new JFrame());
+        new EmployeeUI(new JFrame());
 
         BaseProduct baseProduct = BaseProduct.builder()
                 .title("aaaa")

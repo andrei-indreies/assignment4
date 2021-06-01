@@ -8,6 +8,7 @@ import com.foodmanagement.business.model.menu.MenuItem;
 import com.foodmanagement.business.model.menu.Order;
 import com.foodmanagement.data.FileWriterUtil;
 import com.foodmanagement.data.Serializator;
+import com.foodmanagement.presentation.EmployeeUI;
 import com.foodmanagement.uil.CsvReader;
 import com.foodmanagement.uil.Subject;
 import lombok.Data;
@@ -35,6 +36,7 @@ public class DeliveryService extends Observable implements IDeliveryServiceProce
     public static Map<UUID, String> idToNameMap = new HashMap<>();
 
     private Subject subject;
+    private EmployeeUI employeeUI;
 
     public DeliveryService() {
         subject = new Subject();
@@ -219,6 +221,7 @@ public class DeliveryService extends Observable implements IDeliveryServiceProce
 
         assert wellFormed();
 
+        System.out.println("Creating order..." + order.toString());
         orderListMap.put(order, menuItems);
 
         subject.setOrder(order, menuItems);

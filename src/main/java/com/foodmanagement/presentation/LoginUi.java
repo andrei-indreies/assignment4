@@ -2,6 +2,7 @@ package com.foodmanagement.presentation;
 
 import com.foodmanagement.business.IUserServiceProcessing;
 import com.foodmanagement.business.impl.DeliveryService;
+import com.foodmanagement.business.impl.EmployeeService;
 import com.foodmanagement.business.impl.UserService;
 import com.foodmanagement.business.model.user.User;
 
@@ -18,6 +19,7 @@ public class LoginUi extends BaseUi{
     protected JPasswordField passwordField;
     private IUserServiceProcessing userService;
     private DeliveryService deliveryService;
+    private EmployeeService employeeService;
 
     public LoginUi(JFrame exFrame) {
         this.exFrame = exFrame;
@@ -25,6 +27,7 @@ public class LoginUi extends BaseUi{
 
         userService = new UserService();
         deliveryService = new DeliveryService();
+        employeeService = new EmployeeService(deliveryService.getSubject());
 
         login = InitializerUi.addButtonToFrame(frame, LOGIN_LABEL, 450, 450);
         usernameField = InitializerUi.addJTextFieldToFrame(frame, 350, 370);
@@ -59,7 +62,7 @@ public class LoginUi extends BaseUi{
     }
 
     private void showEmployeeUi() {
-        new EmployeeUI(deliveryService.getSubject(), frame);
+        new EmployeeUI(frame);
     }
 
     private void showClientUi() {

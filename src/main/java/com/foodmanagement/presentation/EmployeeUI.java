@@ -1,30 +1,23 @@
 package com.foodmanagement.presentation;
 
-import com.foodmanagement.uil.Observer;
-import com.foodmanagement.uil.Subject;
+import com.foodmanagement.data.FileReaderUtil;
 
 import javax.swing.*;
 
 import static com.foodmanagement.presentation.InitializerUi.addJTextAreaToFrame;
 
-public class EmployeeUI extends BaseUi implements Observer {
+public class EmployeeUI extends BaseUi {
 
-    Subject subject;
 
     JTextArea textArea;
 
-    public EmployeeUI(Subject subject, JFrame exFrame) {
-        this.subject = subject;
-        this.subject.attach(this);
+    public EmployeeUI(JFrame exFrame) {
 
         this.exFrame = exFrame;
         exFrame.setVisible(false);
 
         textArea = addJTextAreaToFrame(frame, 300, 100);
+        textArea.append(FileReaderUtil.readFile("orders.txt"));
     }
 
-    @Override
-    public void update() {
-        textArea.append(subject.getOrder());
-    }
 }
