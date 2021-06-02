@@ -29,7 +29,6 @@ public class ClientUI extends ProductTableUI {
     protected JButton search;
     protected JButton order;
     private IUserServiceProcessing userService;
-    private DeliveryService deliveryService;
     private EmployeeService employeeService;
     private JTextField keyword;
     private JTextField rating;
@@ -54,7 +53,6 @@ public class ClientUI extends ProductTableUI {
         exFrame.setVisible(false);
 
         userService = new UserService();
-        deliveryService = new DeliveryService();
         employeeService = new EmployeeService(deliveryService.getSubject());
 
         viewMenuButton = addButtonToFrame(frame, "View Menu", 50, 50);
@@ -110,23 +108,6 @@ public class ClientUI extends ProductTableUI {
                 if (!textArea.getText().contains(row)) {
                     textArea.append(row);
                     textArea.append("\n");
-                }
-            }
-        });
-    }
-
-    public void addViewMenuEvent(JButton button) {
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                final List<String> content = deliveryService.getProducts().stream()
-                        .map(MenuItem::toString)
-                        .collect(Collectors.toList());
-
-
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                for (int i = 0; i < content.size(); i++) {
-                    String[] parts = content.get(i).split(",");
-                    model.addRow(new Object[]{parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]});
                 }
             }
         });

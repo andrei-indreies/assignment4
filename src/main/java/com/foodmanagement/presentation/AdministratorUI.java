@@ -18,12 +18,14 @@ import static com.foodmanagement.presentation.LabelsLibrary.*;
 public class AdministratorUI extends ProductTableUI {
     protected JTextField importFileName;
     public AdministratorUI(JFrame exFrame) {
+        this.exFrame = exFrame;
         exFrame.setVisible(false);
         addAppendButton();
         addDeleteButton();
         addImportButton();
         addModifyButton();
         addViewButton();
+        addReportButton();
         table.setBounds((FRAME_WIDTH-700)/2, 450, 700, 450);
         table.setCellSelectionEnabled(false);
     }
@@ -32,6 +34,16 @@ public class AdministratorUI extends ProductTableUI {
         JButton viewMenuButton = addButtonToFrame(frame, "View Menu", 400, 50);
         viewMenuButton.setBounds((FRAME_WIDTH/2) - (150/2), 150, 150, BUTTON_HEIGHT);
         addViewMenuEvent(viewMenuButton);
+    }
+
+    private void addReportButton() {
+        JButton reportButton = addButtonToFrame(frame, "Report Menu", 400, 50);
+        reportButton.setBounds((FRAME_WIDTH/2) - (150/2), 250, 150, BUTTON_HEIGHT);
+        reportButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                ReportUi ReportUi = new ReportUi();
+            }
+        });
     }
 
     private void addAppendButton() {
@@ -45,6 +57,15 @@ public class AdministratorUI extends ProductTableUI {
 
     private void addDeleteButton() {
         JButton deleteButton = InitializerUi.addButtonToFrame(frame, DELETE_LABEL, (FRAME_WIDTH/2) - (BUTTON_WIDTH/2), 200);
+        deleteButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                int row = table.getSelectedRow();
+                String rowData = table.getValueAt(row,0).toString();
+                MenuItem menuItem = deliveryService.getProductByName(rowData);
+                deliveryService.deleteProduct(menuItem.id);
+                showMessageDialog(null, "Product deleted!");
+            }
+        });
     }
 
     private void addModifyButton() {

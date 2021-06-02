@@ -19,7 +19,7 @@ public class ProductTableUI extends BaseUi {
 
     public JTable table;
     public static final String[] header = {"Title", "Rating", "Calories", "Proteins", "Fats", "Sodium", "Price"};
-    protected IDeliveryServiceProcessing  deliveryService;
+    protected DeliveryService  deliveryService;
 
     public ProductTableUI() {
         deliveryService = new DeliveryService();
@@ -33,7 +33,6 @@ public class ProductTableUI extends BaseUi {
         table.setGridColor(Color.orange);
         table.setRowSelectionAllowed(true);
         frame.add(table);
-
     }
 
     protected void addViewMenuEvent(JButton button) {

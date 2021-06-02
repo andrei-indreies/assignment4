@@ -13,6 +13,7 @@ public class LabelsLibrary {
     public static final String USER_REGISTER_SUCCESS = "User registered with success!";
     public static final String PRODUCT_ADDED_SUCCESS = "Product added!";
     public static final String PRODUCT_MODIFIED_SUCCESS = "Product modified!";
+    public static final String GENERATE_LABEL = "Generate";
     public static final int FRAME_WIDTH = 1000;
     public static final int MINI_FRAME_WIDTH = 320;
     public static final int FRAME_HEIGHT = 1000;
